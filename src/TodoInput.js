@@ -6,6 +6,10 @@ class TodoInput extends Component {
 		this.inputRef = React.createRef();
 	}
 
+	componentDidMount = () => {
+		this.inputRef.current.focus();
+	}
+
 	handleInput =(e) => {
 		e.preventDefault();
 		if (this.inputRef.current.value) this.props.addItem(this.inputRef.current.value);

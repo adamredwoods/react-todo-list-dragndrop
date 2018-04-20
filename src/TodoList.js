@@ -1,20 +1,7 @@
 import React, {Component} from 'react';
 import TodoInput from './TodoInput.js'
+import TodoListItem from './TodoListItem.js';
 import './App.css';
-
-
-const ItemList =(props) => {
-	return (
-		props.list.map( (i, j)=>(
-			<div className='box' draggable='true' key={j} id={j}
-				onDrop={props.handleDrop}
-				onDragStart={props.handleStartDrag}
-				onDragOver={(event) => event.preventDefault()}>
-					{j+1}. {i.itemName} <button className='button' onClick={props.handleDelete}>X</button>
-			</div>
-		))
-	)
-}
 
 class TodoList extends Component {
 
@@ -38,7 +25,7 @@ class TodoList extends Component {
 		// console.log('drop'+event.dataTransfer.getData("target"),event.target.id);
 		let a = parseInt(event.target.id), b = parseInt(event.dataTransfer.getData("target"));
 		if (a===b) return;
-		
+
 		let max = this.state.list.length;
 		let newList = [], n=0;
 		while (n<max) {
@@ -76,7 +63,7 @@ class TodoList extends Component {
 				<h1>To do list</h1>
 				<TodoInput addItem={this.addItem} defaultValue='' />
 				<div className="box" >
-					<ItemList
+					<TodoListItem
 						list={this.state.list}
 						updateList={this.updateList}
 						handleDrop={this.handleDrop}
